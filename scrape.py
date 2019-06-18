@@ -47,3 +47,9 @@ def insta_details(urls):
             continue
         time.sleep(10)
     return post_details
+
+def add_promo_key(posts, labels):
+    """Add the promo label to each post by a user"""
+    for ind, post in enumerate(posts):
+        post['promo'] = labels[ind]
+    return posts
