@@ -6,6 +6,12 @@ __pycache__/
 # C extensions
 *.so
 
+#ignore the data file
+data/raw_data/
+data/glove_data/
+*.pkl
+*.txt
+
 # Distribution / packaging
 .Python
 build/
