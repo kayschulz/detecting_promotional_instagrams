@@ -14,6 +14,8 @@ We scraped 50 public instagram users using selenium. We used a selection of cele
 ## Data Preparation
 We hand labeled our data as promotional or non-promotional. We determined a general set of rules for our labeling purposes. If a post is a direct call to do something (buy, check out, vote, come) it is promotional. It may also be promotional if it tags/links to a company. This may not always be the case and is determined on a case by case basis. When it comes to self-promotion, if the post represented a value or a belief, but no call to action then it is considered non-promotion. This was especially important to label the politician's posts. 
 
+Note: We understand that we did not use DRY while we scraped and labeled the data. However, we wanted to show our process in which we did not yet know who we were scraping. 
+
 [Notebook]()
 
 ## Modeling

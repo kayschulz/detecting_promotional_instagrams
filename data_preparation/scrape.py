@@ -42,15 +42,17 @@ def insta_details(urls):
             likes = browser.find_element_by_xpath(xpath_view).text
         age = browser.find_element_by_css_selector('a time').text
         try:
-            xpath_comment = '''//*[@id="react-root"]/section/main/div/div/article/
-                               div[2]/div[1]/ul/li[1]/div/div/div[2]/span'''
+            xpath_comment = '''//*[@id="react-root"]/section/main/div/
+                               div/article/div[2]/div[1]/ul/li[1]/div/
+                               div/div[2]/span'''
             comment = browser.find_element_by_xpath(xpath_comment).text
             insta_link = link.replace('https://www.instagram.com/p', '')
-            username_path = '''//*[@id="react-root"]/section/main/div/div/article/
-                               header/div[2]/div[1]/div[1]/h2/a'''
+            username_path = '''//*[@id="react-root"]/section/main/div/div/
+                               article/header/div[2]/div[1]/div[1]/h2/a'''
             username = browser.find_element_by_xpath(username_path).text
-            post_details.append({'user': username, 'link': insta_link, 'likes/views':
-                                 likes, 'age': age, 'comment': comment})
+            post_details.append({'user': username, 'link': insta_link,
+                                 'likes/views': likes, 'age': age,
+                                 'comment': comment})
         except:
             continue
         time.sleep(10)
