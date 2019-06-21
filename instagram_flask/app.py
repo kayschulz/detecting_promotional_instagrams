@@ -13,11 +13,19 @@ from keras.preprocessing.sequence import pad_sequences
 from keras.preprocessing import sequence
 import pickle
 
+import os
+os.environ['KERAS_BACKEND'] = 'theano'
+import keras as ks
 
 model = tf.keras.models.load_model("app_model.h5")
 tokenizer = pickle.load(open('tokenizer.pkl', 'rb'))
 app = Flask(__name__, static_url_path="")
+graph = tf.get_default_graph()
 
+def get_model():
+    global model
+    model = tf.keras.models.load_model("app_model.h5")
+    
 @app.route('/')
 def index():
     """Return the main page."""
@@ -32,12 +40,15 @@ def tokenize_input(user_input):
     X_t = sequence.pad_sequences(list_tokenized, maxlen=100)
     return X_t
 
-@app.route('/predict', methods=['GET', 'POST'])
+get_model()
+
+@app.route('/predict', methods=['POST'])
 def predict():
     """Return a random prediction."""
-    data = request.json
+    data = request.get_json(force=True)
     X_t = tokenize_input(data['user_input'])
-    prediction = model.predict(X_t)
-    return jsonify({'probability not promo': prediction[0][0].round(4), 
-                     'probability_promo': prediction[0][1].round(4)})
+    prediction = model.predict(X_t).to_list()
+    response = {'probability not promo': prediction[0][0].round(4),
+                'probability_promo': prediction[0][1].round(4)}
+    return jsonify(response)
     
